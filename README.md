@@ -1,5 +1,8 @@
 # cod2docker
+
 Docker image for your Call of Duty 2 server. Libcod included! 
+
+You can find detailed instruction in [Killtube thread](https://killtube.org/showthread.php?3167-CoD2-Setup-CoD2-with-Docker).
 
 
 ## Supported tags
@@ -51,4 +54,6 @@ And replace here volumes path to yours (local:container) and environment variabl
 
 # Support
 
-You always can get support on [Killtube forum](https://killtube.org) and [Killtube Discord chat](https://discordapp.com/invite/mqBchQZ). Feel free to ask!
+You always can get support on [Killtube thread](https://killtube.org/showthread.php?3167-CoD2-Setup-CoD2-with-Docker) and [Killtube Discord chat](https://discordapp.com/invite/mqBchQZ). 
+
+Feel free to ask!
