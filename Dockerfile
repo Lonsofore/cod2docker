@@ -1,4 +1,4 @@
-FROM i386/debian:8-slim
+FROM ubuntu:18.04
 
 ARG cod2_version="1_0"
 ARG libcod_url="https://github.com/voron00/libcod"
@@ -7,14 +7,15 @@ ARG libcod_mysql="1"
 ARG libcod_sqlite="1"
 
 # cod2 and libcod requirements 
-RUN apt-get update \
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
     && apt-get install -y \
         g++-multilib \
-        libstdc++5 \
+        libstdc++5:i386 \
         netcat \
         git \
-    && if [ "$libcod_mysql" != "0" ]; then apt-get install -y libmysqlclient-dev; fi \
-    && if [ "$libcod_sqlite" != "0" ]; then apt-get install -y libsqlite3-dev; fi \
+    && if [ "$libcod_mysql" != "0" ]; then apt-get install -y libmysqlclient-dev:i386; fi \
+    && if [ "$libcod_sqlite" != "0" ]; then apt-get install -y libsqlite3-dev:i386; fi \
     && rm -rf /var/lib/apt/lists
 
 # compile libcod
