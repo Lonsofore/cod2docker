@@ -39,6 +39,6 @@ HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD if [ -z "$(echo -e '\xff\
 # preload libcod
 # plan to unload it
 # start the server
-CMD echo "/cod2/libcod.so" > /etc/ld.so.preload; \
+ENTRYPOINT echo "/cod2/libcod.so" > /etc/ld.so.preload; \
     (sleep 15; echo "" > /etc/ld.so.preload) & \
     /cod2/cod2_lnxded "$PARAMS"
