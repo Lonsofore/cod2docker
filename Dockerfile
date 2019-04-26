@@ -18,15 +18,19 @@ RUN dpkg --add-architecture i386 \
     && if [ "$libcod_sqlite" != "0" ]; then apt-get install -y libsqlite3-dev:i386; fi \
     && rm -rf /var/lib/apt/lists
 
+# copy cod2 server file
+COPY ./cod2_lnxded/${cod2_version} /cod2/cod2_lnxded
+
 # compile libcod
-WORKDIR /cod2
-RUN git clone ${libcod_url} \
+RUN cd /cod2 \
+    && git clone ${libcod_url} \
     && cd libcod \
     && if [ -z "$libcod_commit" ]; then git checkout ${libcod_commit}; fi \
     && yes ${libcod_mysql} | ./doit.sh cod2_${cod2_version} \
     && cp /cod2/libcod/bin/libcod2_${cod2_version}.so /cod2/libcod.so \
     && rm -rf /cod2/libcod
 
+# base dir
 WORKDIR /cod2
 
 # check server info every 5 seconds 3 times
