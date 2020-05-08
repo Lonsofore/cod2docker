@@ -16,17 +16,17 @@ Default version tag include MySQL and SQLite support both. If you want to use Vo
 
 ### List of all supported tags
 
-* [`1.0`, `1.0-0.1`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
+* [`1.0`, `1.0-0.2`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
 
-* [`1.0-voron`, `1.0-voron-0.1`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
+* [`1.0-voron`, `1.0-voron-0.2`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
 
-* [`1.2`, `1.2-0.1`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
+* [`1.2`, `1.2-0.2`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
 
-* [`1.2-voron`, `1.2-voron-0.1`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
+* [`1.2-voron`, `1.2-voron-0.2`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
 
-* [`1.3`, `1.3-0.1`, `latest`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
+* [`1.3`, `1.3-0.2`, `latest`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
 
-* [`1.3-voron`, `1.3-voron-0.1`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
+* [`1.3-voron`, `1.3-voron-0.2`](https://github.com/Lonsofore/cod2docker/blob/master/Dockerfile)
 
 
 ## How to use
