@@ -47,8 +47,7 @@ services:
     volumes:
       - ~/cod2/myserver:/cod2/myserver
       - ~/cod2/main:/cod2/main
-      - ~/cod2/cod2_lnxded_1_0:/cod2/cod2_lnxded
-      - ~/cod2/Library:/cod2/.callofduty2/server/Library
+      - ~/cod2/Library:/cod2/.callofduty2/myserver/Library
     environment:
      PARAMS: "+set fs_homepath /cod2/.callofduty2/ +set fs_game myserver +set dedicated 2 +set net_port 28960 +exec myserver.cfg"
      CHECK_PORT: 28960
