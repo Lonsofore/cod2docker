@@ -35,6 +35,7 @@ Upload your main folder, fs_game of server (server folder) and [cod_lnxded for y
 
 Create (or copy from repo) a docker-compose.yml file contains:
 ```
+# example for 1.0 cod2 server
 version: '3.7'
 services:
   myserver:
@@ -43,14 +44,24 @@ services:
     restart: always
     stdin_open: true
     tty: true
-    network_mode: host
+    ports:
+      - 28960:28960
+      - 28960:28960/udp
     volumes:
       - ~/cod2/myserver:/cod2/myserver
       - ~/cod2/main:/cod2/main
       - ~/cod2/Library:/cod2/.callofduty2/myserver/Library
     environment:
-     PARAMS: "+set fs_homepath /cod2/.callofduty2/ +set fs_game myserver +set dedicated 2 +set net_port 28960 +exec myserver.cfg"
-     CHECK_PORT: 28960
+      PARAMS_BEFORE: "+exec myserver.cfg"
+      COD2_SET_fs_homepath: "/cod2/.callofduty2/"
+      COD2_SET_fs_game: "myserver"
+      COD2_SET_dedicated: 2
+      COD2_SET_net_port: 28960
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
 ```
 And replace here volumes path to yours (local:container) and environment variables with yours (put in PARAMS your own fs_game, server port and server config name and also server port to CHECK_PORT).
 
