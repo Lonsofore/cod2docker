@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build all images and push
-        run: ./build_all.sh lonsofore/cod2 1
+        run: ./scripts/build_all.sh lonsofore/cod2 1
 
       - name: Login to Github
         uses: docker/login-action@v1
@@ -28,5 +28,5 @@ jobs:
           password: ${{ secrets.GH_TOKEN }}
 
       - name: Push all images
-        run: ./push_all.sh lonsofore/cod2 ghcr.io/lonsofore/cod2
+        run: ./scripts/push_all.sh lonsofore/cod2 ghcr.io/lonsofore/cod2
 
