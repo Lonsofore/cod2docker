@@ -15,11 +15,11 @@ services:
       - ~/cod2/main:/cod2/main
       - ~/cod2/Library:/cod2/.callofduty2/myserver/Library
     environment:
-      PARAMS: "+exec myserver.cfg"
-      CVAR_fs_homepath: "/cod2/.callofduty2/"
-      CVAR_fs_game: "myserver"
-      CVAR_dedicated: 2
-      CVAR_net_port: 28960
+      PARAMS_BEFORE: "+exec myserver.cfg"
+      COD2_SET_fs_homepath: "/cod2/.callofduty2/"
+      COD2_SET_fs_game: "myserver"
+      COD2_SET_dedicated: 2
+      COD2_SET_net_port: 28960
     logging:
       driver: "json-file"
       options:

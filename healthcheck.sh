@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # try to find healthcheck port
-[ -z "$CHECK_PORT" ] && CHECK_PORT="$CVAR_net_port"
-[ -z "$CHECK_PORT" ] && CHECK_PORT=$(echo "$PARAMS" | tr "+" "\n" | grep net_port | awk '{print $3}')
+[ -z "$CHECK_PORT" ] && CHECK_PORT="$COD2_SET_net_port"
+[ -z "$CHECK_PORT" ] && CHECK_PORT=$(echo "$PARAMS $PARAMS_BEFORE $PARAMS_AFTER" | tr "+" "\n" | grep net_port | awk '{print $3}')
 [ -z "$CHECK_PORT" ] && CHECK_PORT=28960
 
 # check

@@ -34,8 +34,10 @@ RUN if [ "$libcod_mysql" != "0" ] || [ "$libcod_sqlite" != "0" ]; then apt-get u
 # base dir
 WORKDIR /cod2
 
+COPY healthcheck.sh entrypoint.sh /cod2/
+
 # check server info every 5 seconds 7 times (check, if your server can change a map without restarting container)
-HEALTHCHECK --interval=5s --timeout=3s --retries=7 CMD ./healthcheck.sh
+HEALTHCHECK --interval=5s --timeout=3s --retries=7 CMD /cod2/healthcheck.sh
 
 # start script
-ENTRYPOINT ./entrypoint.sh
+ENTRYPOINT /cod2/entrypoint.sh

@@ -6,7 +6,8 @@ VER=${3:-0}  # 1.0
 
 
 docker_version=$(cat __version__)
-tag="${REPO}/${IMAGE_NAME}:1.${VER}-${docker_version}"
+tag="${REPO}/${IMAGE_NAME}:1.${VER}"
+full_tag="${tag}-${docker_version}"
 ver1="1_${VER}"
 
 docker build \
@@ -14,4 +15,5 @@ docker build \
     --build-arg libcod_mysql=1 \
     --build-arg libcod_sqlite=1 \
     -t $tag \
+    -t $full_tag \
     .
