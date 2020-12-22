@@ -18,7 +18,6 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push images
-        id: build
         run: ./build_all.sh lonsofore cod2 1
 
       - name: Login to Github
@@ -28,5 +27,4 @@ jobs:
           password: ${{ secrets.GH_TOKEN }}
 
       - name: Build and push images
-        id: build
         run: ./build_all.sh docker.pkg.github.com lonsofore/cod2docker/cod2 1
