@@ -16,7 +16,7 @@ COPY ./cod2_lnxded/${cod2_version} /cod2/cod2_lnxded
 
 # compile libcod
 ARG libcod_url="https://github.com/voron00/libcod"
-ARG libcod_commit
+ARG libcod_commit="06837e16e8cbf00f4f2aff2b596986159d835c75"
 ARG libcod_mysql="1"
 ARG libcod_sqlite="1"
 RUN if [ "$libcod_mysql" != "0" ] || [ "$libcod_sqlite" != "0" ]; then apt-get update; fi \
@@ -35,11 +35,7 @@ RUN if [ "$libcod_mysql" != "0" ] || [ "$libcod_sqlite" != "0" ]; then apt-get u
 WORKDIR /cod2
 
 # check server info every 5 seconds 7 times (check, if your server can change a map without restarting container)
-HEALTHCHECK --interval=5s --timeout=3s --retries=7 CMD if [ -z "$(echo -e '\xff\xff\xff\xffgetinfo' | nc -w 1 -u 127.0.0.1 ${CHECK_PORT})" ]; then exit 1; else exit 0; fi
+HEALTHCHECK --interval=5s --timeout=3s --retries=7 CMD ./healthcheck.sh
 
-# preload libcod
-# plan to unload it
-# start the server
-ENTRYPOINT echo "/cod2/libcod.so" > /etc/ld.so.preload; \
-    (sleep 15; echo "" > /etc/ld.so.preload) & \
-    /cod2/cod2_lnxded "$PARAMS"
+# start script
+ENTRYPOINT ./entrypoint.sh

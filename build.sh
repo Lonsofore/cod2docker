@@ -1,12 +1,13 @@
-#!/bin/bash
+#!/bin/bash -ex
 
-image_name="cod2"
-login="lonsofore"
+REPO=${1:-lonsofore}
+IMAGE_NAME=${2:-cod2}
+VER=${3:-0}  # 1.0
 
-ver="0"  # 1.0
+
 docker_version=$(cat __version__)
-tag="${login}/${image_name}:1.${ver}-${docker_version}"
-ver1="1_${ver}"
+tag="${REPO}/${IMAGE_NAME}:1.${VER}-${docker_version}"
+ver1="1_${VER}"
 
 docker build \
     --build-arg cod2_version="${ver1}" \
