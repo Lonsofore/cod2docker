@@ -1,8 +1,7 @@
 #!/bin/bash -ex
 
-REPO=${1:-lonsofore}
-IMAGE_NAME=${2:-cod2}
-PUSH=${3:-""}
+IMAGE_NAME=${1:-lonsofore/cod2}
+PUSH=${2:-""}
 
 
 docker_version=$(cat __version__)
@@ -15,7 +14,7 @@ for ver in ${versions[*]}
 do
     ver1="1_${ver}"
     
-    tag="${REPO}/${IMAGE_NAME}:1.${ver}"
+    tag="${IMAGE_NAME}:1.${ver}"
     full_tag="${tag}-${docker_version}"
     docker build \
         --build-arg cod2_version="${ver1}" \
@@ -30,7 +29,7 @@ do
         docker push ${tag}
     fi
     
-    tag="${REPO}/${IMAGE_NAME}:1.${ver}-voron"
+    tag="${IMAGE_NAME}:1.${ver}-voron"
     full_tag="${tag}-${docker_version}"
     docker build \
         --build-arg cod2_version="${ver1}" \
@@ -46,8 +45,8 @@ do
     fi
 done
 
-tag="${REPO}/${IMAGE_NAME}:latest"
-docker tag ${REPO}/${IMAGE_NAME}:1.3 $tag
+tag="${IMAGE_NAME}:latest"
+docker tag ${IMAGE_NAME}:1.3 $tag
 if [[ "$PUSH" != "" ]]
 then
     docker push ${tag}

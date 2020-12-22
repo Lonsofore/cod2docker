@@ -5,7 +5,7 @@ on:
     branches: master
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,14 +17,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push images
-        run: ./build_all.sh lonsofore cod2 1
+      - name: Build all images and push
+        run: ./build_all.sh lonsofore/cod2 1
 
       - name: Login to Github
         uses: docker/login-action@v1
         with:
-          username: ${{ secrets.GH_USERNAME }}
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_TOKEN }}
 
-      - name: Build and push images
-        run: ./build_all.sh docker.pkg.github.com lonsofore/cod2docker/cod2 1
+      - name: Push all images
+        run: ./push_all.sh lonsofore/cod2 ghcr.io/lonsofore/cod2
+
