@@ -18,17 +18,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build all images and push
-        run: ./scripts/build_all.sh lonsofore/cod2 1
-
-      - name: Login to Github
-        uses: docker/login-action@v1
-        with:
-          #registry: ghcr.io
-          registry: docker.pkg.github.com
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GH_TOKEN }}
-
-      - name: Push all images
-        #run: ./scripts/push_all.sh lonsofore/cod2 ghcr.io/lonsofore/cod2
-        run: ./scripts/push_all.sh lonsofore/cod2 docker.pkg.github.com/lonsofore/cod2docker/cod2
+        run: ./build.sh rutkowski/cod2 3 2 PUSH
 

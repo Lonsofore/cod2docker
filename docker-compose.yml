@@ -1,25 +1,24 @@
-# example for 1.0 cod2 server
 version: '3.7'
 services:
-  myserver:
-    image: lonsofore/cod2:1.0
-    container_name: myserver
+  nl-cod2-test:
+    image: rutkowski/cod2:1.0-server1.3-voron
+    container_name: nl-cod2-test
     restart: always
     stdin_open: true
     tty: true
     ports:
-      - 28960:28960
-      - 28960:28960/udp
+      - 28970:28970
+      - 28970:28970/udp
     volumes:
-      - ~/cod2/myserver:/cod2/myserver
-      - ~/cod2/main:/cod2/main
-      - ~/cod2/Library:/cod2/.callofduty2/myserver/Library
+      - ./nl:/cod2/nl
+      - ~/cod2/main/1_3:/cod2/main
+      - ~/cod2/Library:/cod2/.callofduty2/nl/Library
     environment:
-      PARAMS_BEFORE: "+exec myserver.cfg"
+      PARAMS_BEFORE: "+exec server.cfg"
       COD2_SET_fs_homepath: "/cod2/.callofduty2/"
-      COD2_SET_fs_game: "myserver"
+      COD2_SET_fs_game: "nl"
       COD2_SET_dedicated: 2
-      COD2_SET_net_port: 28960
+      COD2_SET_net_port: 28970
     logging:
       driver: "json-file"
       options:
