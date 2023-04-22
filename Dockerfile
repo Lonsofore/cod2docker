@@ -15,8 +15,8 @@ ARG cod2_patch="0"
 COPY ./cod2_lnxded/1_${cod2_patch} /cod2/cod2_lnxded
 
 # compile libcod
-ARG libcod_url="https://github.com/voron00/libcod"
-ARG libcod_commit="06837e16e8cbf00f4f2aff2b596986159d835c75"
+ARG libcod_url="https://github.com/ibuddieat/zk_libcod"
+ARG libcod_commit="54c4a8463b165bf22a85dece01e89fcf92315aa4"
 ARG mysql_variant="1"
 ARG sqlite_enabled="1"
 RUN if [ "$mysql_variant" != "0" ] || [ "$sqlite_enabled" != "0" ]; then apt-get update; fi \
@@ -25,10 +25,13 @@ RUN if [ "$mysql_variant" != "0" ] || [ "$sqlite_enabled" != "0" ]; then apt-get
     && if [ "$mysql_variant" != "0" ] || [ "$sqlite_enabled" != "0" ]; then apt-get clean; fi  \
     && cd /cod2 \
     && git clone ${libcod_url} \
-    && cd libcod \
-    && if [ -z "$libcod_commit" ]; then git checkout ${libcod_commit}; fi \
-    && yes ${mysql_variant} | ./doit.sh cod2_1_${cod2_patch} \
-    && cp /cod2/libcod/bin/libcod2_1_${cod2_patch}.so /cod2/libcod.so \
+    && cd zk_libcod \
+    && if [ -z "$libcod_commit" ]; then git checkout ${libcod_commit}; fi
+
+WORKDIR /cod2/zk_libcod/code
+COPY ./doit.sh doit.sh
+RUN yes ${mysql_variant} | ./doit.sh --cod2_patch=${cod2_patch} --speex=0 --mysql_variant=${mysql_variant} \
+    && cp ./bin/libcod2_1_${cod2_patch}.so /cod2/libcod.so \
     && rm -rf /cod2/libcod
 
 # base dir
