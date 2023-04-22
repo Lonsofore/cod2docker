@@ -1,19 +1,24 @@
 #!/bin/bash -ex
 
-IMAGE_NAME=${1:-lonsofore/cod2}
-VER=${2:-0}  # 1.0
+IMAGE_NAME=${1:-rutkowski/cod2}
+COD_PATCH=${2:-0}
+MYSQL_VARIANT=${3:-1}
+PUSH=${4:-""}
+VERSION=$(cat __version__)
 
-
-docker_version=$(cat __version__)
-tag="${IMAGE_NAME}:1.${VER}"
-full_tag="${tag}-${docker_version}"
-ver1="1_${VER}"
+tag="${IMAGE_NAME}:${VERSION}-server1.${COD_PATCH}"
+if [[ "$MYSQL_VARIANT" -eq 2 ]]; then
+    tag="${tag}-voron"
+fi
 
 docker build \
-    --build-arg cod2_version="${ver1}" \
-    --build-arg libcod_mysql=1 \
-    --build-arg libcod_sqlite=1 \
+    --build-arg cod2_patch="${COD_PATCH}" \
+    --build-arg mysql_variant="${MYSQL_VARIANT}" \
+    --build-arg sqlite_enabled=1 \
     -t $tag \
-    -t $full_tag \
     .
 
+if [[ "$PUSH" != "" ]]
+then
+    docker push ${tag}
+fi
