@@ -30,7 +30,7 @@ RUN if [ "$mysql_variant" != "0" ] || [ "$sqlite_enabled" != "0" ]; then apt-get
 
 WORKDIR /cod2/zk_libcod/code
 COPY ./doit.sh doit.sh
-RUN yes ${mysql_variant} | ./doit.sh --cod2_patch=${cod2_patch} --speex=0 --mysql_variant=${mysql_variant} \
+RUN ./doit.sh --cod2_patch=${cod2_patch} --speex=0 --mysql_variant=${mysql_variant} \
     && cp ./bin/libcod2_1_${cod2_patch}.so /cod2/libcod.so \
     && rm -rf /cod2/libcod
 
