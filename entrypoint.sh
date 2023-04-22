@@ -12,8 +12,6 @@ for cmd in ${cmds[@]}; do
     COMMANDS="$COMMANDS $parsed" 
 done
 
-# preload libcon and unload it in future
-echo "/cod2/libcod.so" > /etc/ld.so.preload;
-(sleep 15; echo "" > /etc/ld.so.preload) &
+export LD_PRELOAD=/cod2/libcod.so
 
 /cod2/cod2_lnxded "$PARAMS_BEFORE $COMMANDS $PARAMS $PARAMS_AFTER"
